@@ -24,6 +24,8 @@ jobs:
       run: echo "eventname:${{ github.event_name }},ref:${{ github.ref }},refname:${{ github.ref_name }}"
     - name: Check out the repo
       uses: actions/checkout@v3
+      with:
+        ref: ${{ github.ref }} 
     - name: Fetch all branches
       run: git fetch --all
     - name: Check for modifications
