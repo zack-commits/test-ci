@@ -2,8 +2,7 @@ name: test
 
 on:
   create:
-    branches:
-    - 'test/staging'
+    branches: ["test/staging"]
     
 jobs:
   build:
