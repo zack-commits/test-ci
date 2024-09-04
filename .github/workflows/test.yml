@@ -1,30 +1,15 @@
 name: test
 
 on:
-  push:
-    branches:
-    - master
-    - 'test/staging'
-    paths:
-    - '.github/workflows/test.yml'
   create:
     branches:
     - 'test/staging'
-    paths:
-    - '.github/workflows/test.yml'
     
 jobs:
   build:
-    runs-on: [self-hosted, Linux, X64, gc3a]
-    env:
-      BRANCH: ${{ github.head_ref || github.ref_name }}
-    if: |
-      github.event_name == 'push' ||
-      (github.event_name == 'create' && github.ref == 'refs/heads/test/staging')
+    runs-on: ubuntu-latest
     steps:
     - name: Display GitHub event context
       run: echo "${{ toJson(github.event) }}"
-    - name: Check out the repo
-      uses: actions/checkout@v3
     
 
