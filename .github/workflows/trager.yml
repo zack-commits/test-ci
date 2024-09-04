@@ -30,6 +30,7 @@ jobs:
       run: git fetch --all
     - name: Check for modifications
       id: check_diff
+      if: github.event_name == 'create'
       run: |
         # Specify the paths you want to monitor
         monitored_paths="[.github/workflows/trager.yml,tragger_version]"
@@ -42,17 +43,16 @@ jobs:
           echo "No changes detected in monitored paths."
           echo "proceed=false" >> $GITHUB_ENV
         fi
-
+    - name: Abort CI process
+      if: github.event_name == 'create' && env.proceed == 'false'
+      run: |
+        echo "Aborting CI process as no relevant changes were detected."
+        exit 0  # Exit gracefully
     - name: Continue or abort the CI process
       if: env.proceed == 'true'
       run: |
         echo "Running CI processes..."
-        # Your CI steps go here
-        # For example, running tests or building the project
+        echo "eventname:${{ github.event_name }},ref:${{ github.ref }},refname:${{ github.ref_name }}"
 
-    - name: Abort CI process
-      if: env.proceed == 'false'
-      run: |
-        echo "Aborting CI process as no relevant changes were detected."
-        exit 0  # Exit gracefully
+
 
