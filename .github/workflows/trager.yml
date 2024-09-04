@@ -22,5 +22,22 @@ jobs:
     steps:
     - name: trager Display GitHub event context
       run: echo "eventname:${{ github.event_name }},ref:${{ github.ref }},refname:${{ github.ref_name }}"
+    - name: Check if trigger.yml has changed
+      id: check_diff
+      run: |
+        git fetch origin main  # Fetch the main branch
+        git diff --exit-code origin/main -- .github/workflows/trigger.yml || echo "diff"
+
+    - name: Conditional build
+      if: steps.check_diff.outputs.diff == 'diff'
+      run: |
+        echo "Changes detected in trigger.yml, proceeding with the build."
+        # Your build commands go here
+
+    - name: Abort if no changes
+      if: steps.check_diff.outputs.diff != 'diff'
+      run: |
+        echo "No changes detected in trigger.yml, aborting the workflow."
+        exit 0
     
 
