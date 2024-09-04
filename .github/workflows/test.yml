@@ -10,6 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Display GitHub event context
-      run: echo "${{ toJson(github.event) }}"
+      run: echo "eventname:${{ github.event_name }}" eventjson:${{ toJson(github.event) }}"
     
 
