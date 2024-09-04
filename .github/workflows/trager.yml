@@ -49,7 +49,7 @@ jobs:
         echo "Aborting CI process as no relevant changes were detected."
         exit 0  # Exit gracefully
     - name: Continue or abort the CI process
-      if: env.proceed == 'true'
+      if: github.event_name == 'push' || (github.event_name == 'create' && env.proceed == 'true')
       run: |
         echo "Running CI processes..."
         echo "eventname:${{ github.event_name }},ref:${{ github.ref }},refname:${{ github.ref_name }}"
