@@ -1,4 +1,4 @@
-name: test
+name: trager
 
 on:
   push:
@@ -6,12 +6,12 @@ on:
     - main
     - 'test/staging'
     paths:
-    - '.github/workflows/test.yml'
+    - '.github/workflows/trager.yml'
   create:
     branches:
     - 'test/staging'
     paths:
-    - '.github/workflows/test.yml'
+    - '.github/workflows/trager.yml'
     
 jobs:
   build:
