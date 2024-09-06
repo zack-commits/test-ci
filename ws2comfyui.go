@@ -68,7 +68,7 @@ func fluxTxt2ImgHandler(w http.ResponseWriter, r *http.Request) {
 	prompt["13"].(map[string]interface{})["inputs"].(map[string]interface{})["noise_seed"] = time.Now().UnixNano() % 10000000
 
 	// 数据传递到 API
-	serverAddress := "http://127.0.0.1:8188"
+	serverAddress := "https://ra9egd0raba5e1ee.us-east-1.aws.endpoints.huggingface.cloud"
 	clientID := uuid.New().String()
 	p := map[string]interface{}{
 		"prompt":    prompt,
@@ -186,7 +186,59 @@ func sendPostRequest(url string, data interface{}) (*http.Response, error) {
 }
 
 func main() {
-	http.HandleFunc("/flux_txt2img", fluxTxt2ImgHandler)
-	fmt.Println("Server started at :8080")
-	http.ListenAndServe(":8080", nil)
+	// http.HandleFunc("/flux_txt2img", fluxTxt2ImgHandler)
+	// fmt.Println("Server started at :8080")
+	// http.ListenAndServe(":8080", nil)
+
+	serverAddress := "https://ra9egd0raba5e1ee.us-east-1.aws.endpoints.huggingface.cloud"
+	accessToken := "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"
+	clientID := uuid.New().String()
+	// 自定义 header
+	headers := http.Header{}
+	headers.Add("Authorization", fmt.Sprintf("Bearer %s", accessToken))
+	// 建立 WebSocket 连接
+	websocketURL := fmt.Sprintf("ws://%s/ws?clientId=%s", serverAddress, clientID)
+	conn, _, err := websocket.DefaultDialer.Dial(websocketURL, headers)
+	if err != nil {
+		fmt.Println("Failed to connect to WebSocket", http.StatusInternalServerError)
+		return
+	}
+	defer conn.Close()
+
+	fmt.Println("Connected to WebSocket")
+
+	// 监听 WebSocket 消息
+	// outputImages := make(map[string][][]byte)
+	// currentNode := ""
+	// saveWebsocketNodeID := "20"
+
+	for {
+		_, message, err := conn.ReadMessage()
+		if err != nil {
+			break // WebSocket 连接关闭或出错
+		}
+
+		fmt.Println("Received message:", string(message))
+
+		// 解析 JSON 消息
+		// var msg map[string]interface{}
+		// if err := json.Unmarshal(message, &msg); err != nil {
+		// 	continue
+		// }
+
+		// if msg["type"] == "executing" {
+		// 	data := msg["data"].(map[string]interface{})
+		// 	if data["prompt_id"] == queueInfo.PromptID {
+		// 		if data["node"] == nil {
+		// 			break // 执行结束
+		// 		} else {
+		// 			currentNode = data["node"].(string)
+		// 		}
+		// 	}
+		// } else if currentNode == saveWebsocketNodeID {
+		// 	// 处理图片二进制数据
+		// 	imageData := message[8:] // 假设图片数据从第8字节开始
+		// 	outputImages[currentNode] = append(outputImages[currentNode], imageData)
+		// }
+	}
 }

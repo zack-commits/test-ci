@@ -3,16 +3,15 @@ services:
     build:
       context: ./
       # AMD Users uncomment:
-      dockerfile: ./AMD.Dockerfile
+      dockerfile: ./Dockerfile
       # NVIDIA Users uncomment:
       #dockerfile: ./NVIDIA.Dockerfile
     restart: unless-stopped
     volumes:
-      - ./models/checkpoints:/ComfyUI/models/checkpoints
-      - ./models/vae:/ComfyUI/models/vae
-      - ./models/unet:/ComfyUI/models/unet
-      - ./models/clip:/ComfyUI/models/clip
-      - $OUTPUTDIRECTORY:ComfyUI/output
+      - ./ComfyUI/models/checkpoints:/ComfyUI/models/checkpoints
+      - ./ComfyUI/models/vae:/ComfyUI/models/vae
+      - ./ComfyUI/models/unet:/ComfyUI/models/unet
+      - ./ComfyUI/models/clip:/ComfyUI/models/clip
     ports:
       - 8188:8188
     devices:

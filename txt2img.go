@@ -35,7 +35,8 @@ func generateImage(prompt string) {
 	defer wg.Done()
 	// 自定义API的请求地址和Token
 	serverAddress := "https://ra9egd0raba5e1ee.us-east-1.aws.endpoints.huggingface.cloud"
-	endpoint := fmt.Sprintf("%s/sdapi/v1/txt2img", serverAddress)
+	// serverAddress := "127.0.0.1:8080"
+	endpoint := fmt.Sprintf("%s/flux_txt2img", serverAddress)
 	accessToken := "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"
 
 	// 准备JSON请求体
