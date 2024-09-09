@@ -34,18 +34,18 @@ const SYNCNUM = 1
 func generateImage(prompt string) {
 	defer wg.Done()
 	// 自定义API的请求地址和Token
-	serverAddress := "https://ra9egd0raba5e1ee.us-east-1.aws.endpoints.huggingface.cloud"
-	// serverAddress := "127.0.0.1:8080"
+	// serverAddress := "https://ra9egd0raba5e1ee.us-east-1.aws.endpoints.huggingface.cloud"
+	serverAddress := "http://127.0.0.1:8188"
 	endpoint := fmt.Sprintf("%s/flux_txt2img", serverAddress)
-	accessToken := "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"
+	// accessToken := "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"
 
 	// 准备JSON请求体
 	payload := Payload{
-		WorkflowName: "v2_FLUX_D_model_Q8_clip_Q8.json",
+		WorkflowName: "workflow_api.json",
 		Prompt:       prompt,
 		BatchSize:    1,
-		Width:        1024,
-		Height:       768,
+		Width:        30,
+		Height:       30,
 	}
 
 	payloadBytes, err := json.Marshal(payload)
@@ -61,7 +61,7 @@ func generateImage(prompt string) {
 	}
 
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", accessToken))
+	// req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", accessToken))
 
 	// 记录开始时间
 	startTime := time.Now()
@@ -86,6 +86,19 @@ func generateImage(prompt string) {
 		fmt.Println("读取响应错误:", err)
 		return
 	}
+
+	fmt.Println("API 响应状态码:", resp.StatusCode)
+	fmt.Println("API 响应内容:", string(body))
+
+	// 将响应内容写入 api.json 文件
+	err = ioutil.WriteFile("api.json", body, 0644) // 0644 是文件的权限，表示可读写但非执行
+	if err != nil {
+		fmt.Println("保存文件错误:", err)
+		return
+	}
+
+	fmt.Println("响应内容已成功保存到 api.json")
+
 	if resp.StatusCode != http.StatusOK {
 		fmt.Println("API 请求失败，状态码:", resp.StatusCode)
 		fmt.Println("响应内容:", string(body))

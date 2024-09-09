@@ -1,1 +1,4 @@
 img/
+# 忽略.venv目录
+.venv/
+ComfyUI2/
