@@ -2,5 +2,5 @@ img/
 # 忽略.venv目录
 ComfyUI2/
 .venv/
-metrics/grafana/
-metrics/prometheus/
+metrics/grafana/*
+metrics/prometheus/*
