@@ -29,6 +29,8 @@ https://docs.google.com/document/d/1m8lg6vbeKaX2TbS7eP1VPqL14uu_lbX9k-07e3HmPhc/
 https://docs.google.com/document/d/1QvbtVJOSTK1cxGwwgccnn_tiQ36wFo62YFEF4G0qf7o/edit#heading=h.vab3er26gven
 #### openvpn
 https://docs.google.com/document/d/15pQ1COMdknzgPrFZyeT1P7x-aMnRSqrHMASrTwKSrBo/edit#heading=h.r9mknnaaiqfj
+#### google drive
+https://drive.google.com/drive/folders/1O-XnPMvcWg7EPLyx9bRZ9A3UdiXCk6CI
 
 
 
@@ -99,7 +101,7 @@ curl -L -o ./models/clip/Hyper-FLUX.1-dev-8steps-lora.safetensors  https://huggi
 curl -L -o ./models/clip/Hyper-FLUX.1-dev-16steps-lora.safetensors  https://huggingface.co/ByteDance/Hyper-SD/resolve/main/Hyper-FLUX.1-dev-16steps-lora.safetensors?download=true
 curl -L -o ./models/clip/Hyper-FLUX.1-dev-8steps-lora_rank1.safetensors https://huggingface.co/bdsqlsz/Hyper-Flux1-dev/resolve/main/Hyper-FLUX.1-dev-8steps-lora_rank1.safetensors?download=true
 
-vae
+#### vae
 https://liblibai-online.liblib.cloud/models/comfyui/afc8e28272cd15db3919bacdb6918ce9c1ed22e96cb12c4d5ed0fba823529e38.sft?auth_key=1726022125-9b83542f2f6d488e91ba4067ff9e7bc8-0-6c637b8133219176d4472ba69de497c5&attname=F.1%20模型下载版-黑暗森林工作室_FLUX.1-vae.sft
 
 

@@ -1,0 +1,29 @@
+services:
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    hostname: prometheus
+    volumes:
+      - ./conf/prometheus.yml:/etc/prometheus/prometheus.yml  # 挂载本地的nginx.conf到容器中
+      - ./prometheus:/prometheus #挂载本地的Prometheus 数据存储
+    ports:
+      - "9090:9090"  # 映射9090端口到主机
+    restart: always
+  # prometheus-exporter:
+  #   image: prom/node-exporter
+  #   container_name: prometheus-exporter
+  #   hostname: prometheus-exporter
+  #   ports:
+  #     - 9100:9100
+  grafana:
+    image: grafana/grafana-oss
+    container_name: grafana
+    hostname: grafana
+    ports:
+      - "3000:3000"  # 映射3000端口到主机
+    restart: always
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin  # 设置管理员密码
+    volumes:
+      - ./conf/grafana.ini:/etc/grafana/grafana.ini  # 挂载本地的grafana.ini到容器中
+      - ./grafana:/var/lib/grafana  # 挂载本地的数据目录到容器中
