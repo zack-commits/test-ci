@@ -31,7 +31,7 @@ RUN git clone https://github.com/crystian/ComfyUI-Manager.git /ComfyUI/custom_no
     git clone https://github.com/city96/ComfyUI-GGUF.git /ComfyUI/custom_nodes/ComfyUI-GGUF && \
     git clone https://github.com/pythongosssss/ComfyUI-Custom-Scripts /ComfyUI/custom_nodes/ComfyUI-Custom-Scripts 
 # 清理系统不再需要的构建依赖  暂时保留git，因为后续需要更新代码
-RUN apt remove -y git cargo cmake g++ gcc python3-dev musl-dev make nasm && apt autoremove -y && apt clean -y
+RUN apt remove -y cargo cmake g++ gcc python3-dev musl-dev make nasm && apt autoremove -y && apt clean -y
 
 RUN chmod +x /ComfyUI/main.py
 
