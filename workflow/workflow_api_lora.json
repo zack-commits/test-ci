@@ -1,0 +1,201 @@
+{
+  "82": {
+    "inputs": {
+      "clip_name1": "clip_l.t5xxl_fp8_e4m3fn.safetensors",
+      "clip_name2": "clip_l.safetensors",
+      "type": "flux"
+    },
+    "class_type": "DualCLIPLoader",
+    "_meta": {
+      "title": "DualCLIPLoader"
+    }
+  },
+  "84": {
+    "inputs": {
+      "noise": [
+        "86",
+        0
+      ],
+      "guider": [
+        "88",
+        0
+      ],
+      "sampler": [
+        "91",
+        0
+      ],
+      "sigmas": [
+        "90",
+        0
+      ],
+      "latent_image": [
+        "89",
+        0
+      ]
+    },
+    "class_type": "SamplerCustomAdvanced",
+    "_meta": {
+      "title": "SamplerCustomAdvanced"
+    }
+  },
+  "86": {
+    "inputs": {
+      "noise_seed": 546114009856567
+    },
+    "class_type": "RandomNoise",
+    "_meta": {
+      "title": "RandomNoise"
+    }
+  },
+  "88": {
+    "inputs": {
+      "model": [
+        "100",
+        0
+      ],
+      "conditioning": [
+        "93",
+        0
+      ]
+    },
+    "class_type": "BasicGuider",
+    "_meta": {
+      "title": "BasicGuider"
+    }
+  },
+  "89": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Empty Latent Image"
+    }
+  },
+  "90": {
+    "inputs": {
+      "scheduler": "simple",
+      "steps": 25,
+      "denoise": 1,
+      "model": [
+        "95",
+        0
+      ]
+    },
+    "class_type": "BasicScheduler",
+    "_meta": {
+      "title": "BasicScheduler"
+    }
+  },
+  "91": {
+    "inputs": {
+      "sampler_name": "euler"
+    },
+    "class_type": "KSamplerSelect",
+    "_meta": {
+      "title": "KSamplerSelect"
+    }
+  },
+  "93": {
+    "inputs": {
+      "text": "A scepter adorned with a white bird ornament at the top, featuring blue gems set within a black, intricately wrapped handle. The bird has an elegant design with an animated, cartoonish style, characterized by smooth lines and a slightly glossy finish, giving it a magical fantasy vibe.",
+      "clip": [
+        "82",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "95": {
+    "inputs": {
+      "lora_name": "Hyper-FLUX.1-dev-8steps-lora.safetensors",
+      "strength_model": 0.13,
+      "model": [
+        "104",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "LoraLoaderModelOnly"
+    }
+  },
+  "96": {
+    "inputs": {
+      "samples": [
+        "84",
+        0
+      ],
+      "vae": [
+        "97",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "97": {
+    "inputs": {
+      "vae_name": "ae.sft"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "98": {
+    "inputs": {
+      "images": [
+        "96",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "100": {
+    "inputs": {
+      "multiplier": 0.35000000000000003,
+      "model": [
+        "103",
+        0
+      ]
+    },
+    "class_type": "RescaleCFG",
+    "_meta": {
+      "title": "RescaleCFG"
+    }
+  },
+  "103": {
+    "inputs": {
+      "unet_name": "flux1-dev-Q8_0.gguf"
+    },
+    "class_type": "UnetLoaderGGUF",
+    "_meta": {
+      "title": "Unet Loader (GGUF)"
+    }
+  },
+  "104": {
+    "inputs": {
+      "lora_name": "3d.safetensors",
+      "strength_model": 0.9,
+      "model": [
+        "103",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "LoraLoaderModelOnly"
+    }
+  }
+}

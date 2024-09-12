@@ -2,25 +2,64 @@ services:
   comfy-ui:
     build:
       context: ./
-      # AMD Users uncomment:
       dockerfile: ./Dockerfile
-      # NVIDIA Users uncomment:
-      #dockerfile: ./NVIDIA.Dockerfile
     restart: unless-stopped
     volumes:
-      - ./ComfyUI/models/checkpoints:/ComfyUI/models/checkpoints
-      - ./ComfyUI/models/vae:/ComfyUI/models/vae
-      - ./ComfyUI/models/unet:/ComfyUI/models/unet
-      - ./ComfyUI/models/clip:/ComfyUI/models/clip
+      - ./models/checkpoints:/ComfyUI/models/checkpoints
+      - ./models/vae:/ComfyUI/models/vae
+      - ./models/unet:/ComfyUI/models/unet
+      - ./models/clip:/ComfyUI/models/clip
+      - ./models/loras:/ComfyUI/models/loras
+      - ./output:/ComfyUI/output
+      - ./v2_FLUX_D_model_Q8_clip_Q8.json:/repository/v2_FLUX_D_model_Q8_clip_Q8.json
     ports:
       - 8188:8188
-    devices:
-      - "/dev/dri:/dev/dri"
-      ## For AMD GPU
-      - "/dev/kfd:/dev/kfd"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
     healthcheck:
-      test: curl --fail http://localhost:8188/ || exit 
+      test: curl --fail http://localhost:8188/ || exit
       interval: 40s
       timeout: 30s
       retries: 3
       start_period: 60s
+  comfy-ui2:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    restart: unless-stopped
+    volumes:
+      - ./models/checkpoints:/ComfyUI/models/checkpoints
+      - ./models/vae:/ComfyUI/models/vae
+      - ./models/unet:/ComfyUI/models/unet
+      - ./models/clip:/ComfyUI/models/clip
+      - ./models/loras:/ComfyUI/models/loras
+      - ./output:/ComfyUI/output
+      - ./v2_FLUX_D_model_Q8_clip_Q8.json:/repository/v2_FLUX_D_model_Q8_clip_Q8.json
+    ports:
+      - 8189:8188
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    healthcheck:
+      test: curl --fail http://localhost:8189/ || exit
+      interval: 40s
+      timeout: 30s
+      retries: 3
+      start_period: 60s
+  nginx:
+    image: nginx:latest
+    container_name: comfyui_load_balancer
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf  # 挂载本地的nginx.conf到容器中
+    ports:
+      - "80:80"  # 映射80端口到主机
+    restart: always

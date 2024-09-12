@@ -1,0 +1,173 @@
+{
+  "1": {
+    "inputs": {
+      "clip_name1": "clip_l.safetensors",
+      "clip_name2": "t5xxl_fp16.safetensors",
+      "type": "flux"
+    },
+    "class_type": "DualCLIPLoaderGGUF",
+    "_meta": {
+      "title": "Dual CLIP Loader (GGUF)"
+    }
+  },
+  "2": {
+    "inputs": {
+      "unet_name": "flux1-dev-Q8_0.gguf"
+    },
+    "class_type": "UnetLoaderGGUF",
+    "_meta": {
+      "title": "Unet Model Loader (GGUF)"
+    }
+  },
+  "4": {
+    "inputs": {
+      "vae_name": "ae.sft"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "VAE Loader"
+    }
+  },
+  "6": {
+    "inputs": {
+      "model": [
+        "2",
+        0
+      ],
+      "conditioning": [
+        "9",
+        0
+      ]
+    },
+    "class_type": "BasicGuider",
+    "_meta": {
+      "title": "BasicGuider"
+    }
+  },
+  "8": {
+    "inputs": {
+      "samples": [
+        "17",
+        0
+      ],
+      "vae": [
+        "4",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "9": {
+    "inputs": {
+      "guidance": 3.5,
+      "conditioning": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "FluxGuidance",
+    "_meta": {
+      "title": "FluxGuidance"
+    }
+  },
+  "11": {
+    "inputs": {
+      "text": "An anime-style illustration of a girl in a kimono, enjoying ozoni with a bashful expression, standing in a wide-eyed pose suitable for the New Year, anime coloring",
+      "clip": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Prompt"
+    }
+  },
+  "12": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "EmptySD3LatentImage",
+    "_meta": {
+      "title": "Picture size"
+    }
+  },
+  "13": {
+    "inputs": {
+      "noise_seed": 400531953890522
+    },
+    "class_type": "RandomNoise",
+    "_meta": {
+      "title": "Seed"
+    }
+  },
+  "14": {
+    "inputs": {
+      "sampler_name": "euler"
+    },
+    "class_type": "KSamplerSelect",
+    "_meta": {
+      "title": "Sampler"
+    }
+  },
+  "15": {
+    "inputs": {
+      "scheduler": "normal",
+      "steps": 25,
+      "denoise": 1,
+      "model": [
+        "2",
+        0
+      ]
+    },
+    "class_type": "BasicScheduler",
+    "_meta": {
+      "title": "Scheduler"
+    }
+  },
+  "17": {
+    "inputs": {
+      "noise": [
+        "13",
+        0
+      ],
+      "guider": [
+        "6",
+        0
+      ],
+      "sampler": [
+        "14",
+        0
+      ],
+      "sigmas": [
+        "15",
+        0
+      ],
+      "latent_image": [
+        "12",
+        0
+      ]
+    },
+    "class_type": "SamplerCustomAdvanced",
+    "_meta": {
+      "title": "SamplerAdvanced"
+    }
+  },
+  "20": {
+    "inputs": {
+      "images": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "SaveImageWebsocket",
+    "_meta": {
+      "title": "SaveImageWebsocket"
+    }
+  }
+}

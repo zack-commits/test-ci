@@ -5,8 +5,10 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"net/http"
+	"os"
 	"strings"
 	"sync"
 	"time"
@@ -35,17 +37,18 @@ func generateImage(prompt string) {
 	defer wg.Done()
 	// 自定义API的请求地址和Token
 	// serverAddress := "https://ra9egd0raba5e1ee.us-east-1.aws.endpoints.huggingface.cloud"
-	serverAddress := "http://127.0.0.1:8188"
+	// serverAddress := "http://127.0.0.1:8189"
+	serverAddress := "https://9a28-13-48-53-51.ngrok-free.app"
 	endpoint := fmt.Sprintf("%s/flux_txt2img", serverAddress)
 	// accessToken := "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"
 
 	// 准备JSON请求体
 	payload := Payload{
-		WorkflowName: "workflow_api.json",
+		WorkflowName: "v2_FLUX_D_model_Q8_clip_Q8.json",
 		Prompt:       prompt,
 		BatchSize:    1,
-		Width:        30,
-		Height:       30,
+		Width:        1024,
+		Height:       1024,
 	}
 
 	payloadBytes, err := json.Marshal(payload)
@@ -81,23 +84,23 @@ func generateImage(prompt string) {
 	fmt.Printf("API 响应时间: %.2f 秒\n", responseTime.Seconds())
 
 	// 读取响应
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		fmt.Println("读取响应错误:", err)
 		return
 	}
 
-	fmt.Println("API 响应状态码:", resp.StatusCode)
-	fmt.Println("API 响应内容:", string(body))
+	// fmt.Println("API 响应状态码:", resp.StatusCode)
+	// fmt.Println("API 响应内容:", string(body))
 
 	// 将响应内容写入 api.json 文件
-	err = ioutil.WriteFile("api.json", body, 0644) // 0644 是文件的权限，表示可读写但非执行
-	if err != nil {
-		fmt.Println("保存文件错误:", err)
-		return
-	}
+	// err = os.WriteFile("api.json", body, 0644) // 0644 是文件的权限，表示可读写但非执行
+	// if err != nil {
+	// 	fmt.Println("保存文件错误:", err)
+	// 	return
+	// }
 
-	fmt.Println("响应内容已成功保存到 api.json")
+	// fmt.Println("响应内容已成功保存到 api.json")
 
 	if resp.StatusCode != http.StatusOK {
 		fmt.Println("API 请求失败，状态码:", resp.StatusCode)
@@ -105,7 +108,7 @@ func generateImage(prompt string) {
 		return
 	}
 
-	err = ioutil.WriteFile("api.json", body, 0644)
+	err = os.WriteFile("api.json", body, 0644)
 	if err != nil {
 		fmt.Println("保存json错误:", err)
 		return

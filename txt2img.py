@@ -8,12 +8,13 @@ import time
 
 # 自定义API
 server_address = "https://ra9egd0raba5e1ee.us-east-1.aws.endpoints.huggingface.cloud"
+server_address = "https://3457-13-48-53-51.ngrok-free.app"
 # server_address = "http://127.0.0.1:8188"
 endpoint = f"{server_address}/flux_txt2img"
 access_token = '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'
 
 payload = {
-    "workflow_name": "v2_FLUX_D_model_Q8_clip_Q8.json",
+    "workflow_name": "workflow.json",
     "prompt": "In a forest, the sun is shining brightly, and the air is filled with the fragrance of flowers and the chirping of birds. Two little girls are holding hands, smiling at the camera in a front-facing shot. A wise old grandpa Tree is smiling and looking at them. One of the girls is wearing a pale yellow dress with lace edges, glasses, and has a black ponytail, while the other is wearing blue jeans and a pink shirt with long golden hair. There is also a wooden sign stuck in the ground beside them, which reads ‘Happy Childhood.’ Contemporary fashion photo shoot, masterpiece, realism, 4k, high quality, high focus, superior quality, sharp and clear.",
     "batch_size": 1,
     "width": 1024,
@@ -41,11 +42,11 @@ try:
         # 打印完整的响应内容
         # print("API 响应内容:", json.dumps(result_json, indent=1, ensure_ascii=False))
 
-        # 将响应内容保存到文件中
-        # with open('api_response.json', 'w', encoding='utf-8') as f:
-        #     json.dump(result_json, f, ensure_ascii=False, indent=2)
+        #将响应内容保存到文件中
+        with open('api_response.json', 'w', encoding='utf-8') as f:
+            json.dump(result_json, f, ensure_ascii=False, indent=2)
         
-        # print("API 响应已保存到文件 'api_response.json'")
+        print("API 响应已保存到文件 'api_response.json'")
         
        # 检查响应中是否包含图片数据
         image_data = result_json[0]['image_base64']

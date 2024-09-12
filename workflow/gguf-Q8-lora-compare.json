@@ -1,0 +1,995 @@
+{
+  "last_node_id": 51,
+  "last_link_id": 92,
+  "nodes": [
+    {
+      "id": 5,
+      "type": "EmptyLatentImage",
+      "pos": {
+        "0": -698,
+        "1": 749
+      },
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            38,
+            77
+          ],
+          "slot_index": 0,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        1
+      ]
+    },
+    {
+      "id": 18,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": -247.7042694091797,
+        "1": 163.3194580078125
+      },
+      "size": {
+        "0": 422.84503173828125,
+        "1": 164.31304931640625
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 91,
+          "label": "CLIP"
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 40,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            88
+          ],
+          "slot_index": 0,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "Photorealistic conker the short anthropomorphic cartoon squirrel in real life conker, wearing a blue hoodie .  highly detailed, realistic lighting with highly detailed fur. \nHe is lying on a fancy bed in a sexy pose, looking seductive and has a speech bubble with the text \"I Love AIXWZ\""
+      ]
+    },
+    {
+      "id": 20,
+      "type": "VAEDecode",
+      "pos": {
+        "0": -270.7185974121094,
+        "1": 552.8540649414062
+      },
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 28,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 37,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            30,
+            74
+          ],
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 21,
+      "type": "SaveImage",
+      "pos": {
+        "0": 490.2957763671875,
+        "1": 149.3194580078125
+      },
+      "size": {
+        "0": 410.5588684082031,
+        "1": 446.8206481933594
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 30,
+          "label": "图像"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ]
+    },
+    {
+      "id": 27,
+      "type": "PrimitiveNode",
+      "pos": {
+        "0": -697,
+        "1": 896
+      },
+      "size": {
+        "0": 331.53118896484375,
+        "1": 151.32618713378906
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            40,
+            66
+          ],
+          "slot_index": 0,
+          "widget": {
+            "name": "text"
+          },
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Run widget replace on values": false
+      },
+      "widgets_values": [
+        "Photorealistic conker the short anthropomorphic cartoon squirrel in real life conker, wearing a blue hoodie .  highly detailed, realistic lighting with highly detailed fur. \nHe is lying on a fancy bed in a sexy pose, looking seductive and has a speech bubble with the text \"I Love AIXWZ\""
+      ]
+    },
+    {
+      "id": 41,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": -243.5303955078125,
+        "1": 830.4292602539062
+      },
+      "size": {
+        "0": 422.84503173828125,
+        "1": 164.31304931640625
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 75,
+          "label": "CLIP"
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 66,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            71
+          ],
+          "slot_index": 0,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "Photorealistic conker the short anthropomorphic cartoon squirrel in real life conker, wearing a blue hoodie .  highly detailed, realistic lighting with highly detailed fur. \nHe is lying on a fancy bed in a sexy pose, looking seductive and has a speech bubble with the text \"I Love AIXWZ\""
+      ]
+    },
+    {
+      "id": 43,
+      "type": "VAEDecode",
+      "pos": {
+        "0": -244.19935607910156,
+        "1": 1143.237060546875
+      },
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 68,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 76,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            72,
+            73
+          ],
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 46,
+      "type": "FluxSamplerParams+",
+      "pos": {
+        "0": 119.80071258544922,
+        "1": 825.2372436523438
+      },
+      "size": {
+        "0": 315,
+        "1": 478.00006103515625
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 70,
+          "label": "model"
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 71,
+          "label": "conditioning"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 77,
+          "label": "latent_image"
+        },
+        {
+          "name": "seed",
+          "type": "STRING",
+          "link": 80,
+          "widget": {
+            "name": "seed"
+          },
+          "label": "seed"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": [
+            68
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "latent"
+        },
+        {
+          "name": "params",
+          "type": "SAMPLER_PARAMS",
+          "links": null,
+          "shape": 3,
+          "label": "params"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FluxSamplerParams+"
+      },
+      "widgets_values": [
+        "7",
+        "euler",
+        "beta",
+        "20",
+        "3.5",
+        "",
+        "",
+        "1.0"
+      ]
+    },
+    {
+      "id": 47,
+      "type": "SaveImage",
+      "pos": {
+        "0": 470.80072021484375,
+        "1": 864.2372436523438
+      },
+      "size": {
+        "0": 410.5588684082031,
+        "1": 446.8206481933594
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 72,
+          "label": "图像"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ]
+    },
+    {
+      "id": 48,
+      "type": "PrimitiveNode",
+      "pos": {
+        "0": -683,
+        "1": 1110
+      },
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            80,
+            81
+          ],
+          "slot_index": 0,
+          "widget": {
+            "name": "seed"
+          },
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Run widget replace on values": false
+      },
+      "widgets_values": [
+        "7"
+      ]
+    },
+    {
+      "id": 36,
+      "type": "Image Comparer (rgthree)",
+      "pos": {
+        "0": 995,
+        "1": 181
+      },
+      "size": {
+        "0": 1064.7320556640625,
+        "1": 1127.648681640625
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_a",
+          "type": "IMAGE",
+          "link": 74,
+          "label": "图像_A",
+          "dir": 3
+        },
+        {
+          "name": "image_b",
+          "type": "IMAGE",
+          "link": 73,
+          "label": "图像_B",
+          "dir": 3
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "comparer_mode": "Slide"
+      },
+      "widgets_values": [
+        [
+          {
+            "name": "A",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_ydpbh_00001_.png&type=temp&subfolder=&rand=0.9192243714974488"
+          },
+          {
+            "name": "B",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_ydpbh_00002_.png&type=temp&subfolder=&rand=0.5148469684613088"
+          }
+        ]
+      ]
+    },
+    {
+      "id": 14,
+      "type": "DualCLIPLoader",
+      "pos": {
+        "0": -693,
+        "1": 493
+      },
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            75,
+            90
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "t5xxl_fp8_e4m3fn.safetensors",
+        "clip_l.safetensors",
+        "flux"
+      ]
+    },
+    {
+      "id": 12,
+      "type": "VAELoader",
+      "pos": {
+        "0": -695,
+        "1": 647
+      },
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            37,
+            76
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ]
+    },
+    {
+      "id": 24,
+      "type": "UnetLoaderGGUF",
+      "pos": {
+        "0": -270.7185974121094,
+        "1": 212.85440063476562
+      },
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            83
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "MODEL"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UnetLoaderGGUF"
+      },
+      "widgets_values": [
+        "flux1-dev-Q8_0.gguf"
+      ]
+    },
+    {
+      "id": 22,
+      "type": "LoraLoader|pysssss",
+      "pos": {
+        "0": -297.70428466796875,
+        "1": 321.3194885253906
+      },
+      "size": {
+        "0": 340.36065673828125,
+        "1": 170
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 83,
+          "label": "模型"
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 90,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            84
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            91
+          ],
+          "slot_index": 1,
+          "shape": 3,
+          "label": "CLIP"
+        },
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoader|pysssss"
+      },
+      "widgets_values": [
+        {
+          "content": "Hyper-FLUX.1-dev-8steps-lora.safetensors",
+          "image": null
+        },
+        0.8,
+        1,
+        "[none]"
+      ]
+    },
+    {
+      "id": 45,
+      "type": "UnetLoaderGGUF",
+      "pos": {
+        "0": -269.1992492675781,
+        "1": 907.2372436523438
+      },
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            70
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "MODEL"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UnetLoaderGGUF"
+      },
+      "widgets_values": [
+        "flux1-dev-Q8_0.gguf"
+      ]
+    },
+    {
+      "id": 26,
+      "type": "FluxSamplerParams+",
+      "pos": {
+        "0": 96.29576873779297,
+        "1": 184.3194580078125
+      },
+      "size": {
+        "0": 315,
+        "1": 478.0000305175781
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 84,
+          "label": "model"
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 88,
+          "label": "conditioning"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 38,
+          "label": "latent_image"
+        },
+        {
+          "name": "seed",
+          "type": "STRING",
+          "link": 81,
+          "widget": {
+            "name": "seed"
+          },
+          "label": "seed"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": [
+            28
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "latent"
+        },
+        {
+          "name": "params",
+          "type": "SAMPLER_PARAMS",
+          "links": null,
+          "shape": 3,
+          "label": "params"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FluxSamplerParams+"
+      },
+      "widgets_values": [
+        "7",
+        "euler",
+        "beta",
+        "10",
+        "3.5",
+        "",
+        "",
+        "1"
+      ]
+    }
+  ],
+  "links": [
+    [
+      28,
+      26,
+      0,
+      20,
+      0,
+      "LATENT"
+    ],
+    [
+      30,
+      20,
+      0,
+      21,
+      0,
+      "IMAGE"
+    ],
+    [
+      37,
+      12,
+      0,
+      20,
+      1,
+      "VAE"
+    ],
+    [
+      38,
+      5,
+      0,
+      26,
+      2,
+      "LATENT"
+    ],
+    [
+      40,
+      27,
+      0,
+      18,
+      1,
+      "STRING"
+    ],
+    [
+      66,
+      27,
+      0,
+      41,
+      1,
+      "STRING"
+    ],
+    [
+      68,
+      46,
+      0,
+      43,
+      0,
+      "LATENT"
+    ],
+    [
+      70,
+      45,
+      0,
+      46,
+      0,
+      "MODEL"
+    ],
+    [
+      71,
+      41,
+      0,
+      46,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      72,
+      43,
+      0,
+      47,
+      0,
+      "IMAGE"
+    ],
+    [
+      73,
+      43,
+      0,
+      36,
+      1,
+      "IMAGE"
+    ],
+    [
+      74,
+      20,
+      0,
+      36,
+      0,
+      "IMAGE"
+    ],
+    [
+      75,
+      14,
+      0,
+      41,
+      0,
+      "CLIP"
+    ],
+    [
+      76,
+      12,
+      0,
+      43,
+      1,
+      "VAE"
+    ],
+    [
+      77,
+      5,
+      0,
+      46,
+      2,
+      "LATENT"
+    ],
+    [
+      80,
+      48,
+      0,
+      46,
+      3,
+      "STRING"
+    ],
+    [
+      81,
+      48,
+      0,
+      26,
+      3,
+      "STRING"
+    ],
+    [
+      83,
+      24,
+      0,
+      22,
+      0,
+      "MODEL"
+    ],
+    [
+      84,
+      22,
+      0,
+      26,
+      0,
+      "MODEL"
+    ],
+    [
+      88,
+      18,
+      0,
+      26,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      90,
+      14,
+      0,
+      22,
+      1,
+      "CLIP"
+    ],
+    [
+      91,
+      22,
+      1,
+      18,
+      0,
+      "CLIP"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "GGUF No Lora",
+      "bounding": [
+        -296,
+        735,
+        1215,
+        631
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "GGUF Q8 with LORA",
+      "bounding": [
+        -296,
+        80,
+        1214,
+        609
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8954302432552438,
+      "offset": [
+        417.23187950716215,
+        29.689639349858925
+      ]
+    },
+    "workspace_info": {
+      "id": "S3hhNNPxdGRP7n664ynkx"
+    }
+  },
+  "version": 0.4
+}

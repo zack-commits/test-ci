@@ -125,7 +125,7 @@ class PromptServer():
         async def flux_txt2img(request):
             data = await request.json()
             workflow_name = data.pop("workflow_name", "v2_FLUX_D_model_Q8_clip_Q8.json")
-            workflow_pth = os.path.join("/Users/ctw/go/src/test-ci/workflow", workflow_name)
+            workflow_pth = os.path.join("/repository", workflow_name)
 
             if os.path.exists(workflow_pth):
                 with open(workflow_pth, "r") as file:
@@ -139,12 +139,13 @@ class PromptServer():
             width = data.pop("width", 1024)
             height = data.pop("height", 1024)
 
-            prompt["6"]["inputs"]["text"] = character
-            prompt["5"]["inputs"]["batch_size"] = batch_size
-            prompt["5"]["inputs"]["width"] = width
-            prompt["5"]["inputs"]["height"] = height
-            # prompt["13"]["inputs"]["noise_seed"] = random.randint(1, 10000000)
+            prompt["11"]["inputs"]["text"] = character
+            prompt["12"]["inputs"]["batch_size"] = batch_size
+            prompt["12"]["inputs"]["width"] = width
+            prompt["12"]["inputs"]["height"] = height
+            prompt["13"]["inputs"]["noise_seed"] = random.randint(1, 10000000)
 
+            # 数据传递
             server_address = "127.0.0.1:8188"
             client_id = str(uuid.uuid4())
             websocket_url = f"ws://{server_address}/ws?clientId={client_id}"
@@ -178,7 +179,6 @@ class PromptServer():
                             output_images[current_node] = images_output
 
             result = []
-            logging.info("output_images: %s", output_images)
             for node_id in output_images:
                 for idx, image_data in enumerate(output_images[node_id]):
                     image = Image.open(io.BytesIO(image_data))
@@ -186,9 +186,7 @@ class PromptServer():
                     image.save(buffered, format="PNG")
                     img_base64 = base64.b64encode(buffered.getvalue()).decode('utf-8')
                     result.append({"image_base64": img_base64, "index": idx})
-                    logging.info("image base64: %s", img_base64)
             return web.json_response(result)
-
         @routes.post("/flux_img2img")
         async def flux_img2img(request):
 
