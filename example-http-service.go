@@ -1,33 +1,32 @@
 package main
 
 import (
-	"fmt"
-	"io"
-	"log"
-	"math/rand"
 	"net/http"
+	"strconv"
 	"time"
 )
 
-// Simple example HTTP service for trying out Beyla.
-// 20% of calls will fail with HTTP status 500.
-
-func handleRequest(rw http.ResponseWriter, _ *http.Request) {
-	time.Sleep(time.Duration(rand.Float64()*400.0) * time.Millisecond)
-	if rand.Int31n(100) < 80 {
-		rw.WriteHeader(200)
-		if _, err := io.WriteString(rw, "Hello from the example HTTP service.\n"); err != nil {
-			log.Fatal(err)
+func handleRequest(rw http.ResponseWriter, req *http.Request) {
+	status := 200
+	for k, v := range req.URL.Query() {
+		if len(v) == 0 {
+			continue
 		}
-	} else {
-		rw.WriteHeader(500)
-		if _, err := io.WriteString(rw, "Simulating an error response with HTTP status 500.\n"); err != nil {
-			log.Fatal(err)
+		switch k {
+		case "status":
+			if s, err := strconv.Atoi(v[0]); err == nil {
+				status = s
+			}
+		case "delay":
+			if d, err := time.ParseDuration(v[0]); err == nil {
+				time.Sleep(d)
+			}
 		}
 	}
+	rw.WriteHeader(status)
 }
 
 func main() {
-	fmt.Println("Listening on http://localhost:8080")
-	log.Fatal(http.ListenAndServe(":8080", http.HandlerFunc(handleRequest)))
+	http.ListenAndServe(":8080",
+		http.HandlerFunc(handleRequest))
 }

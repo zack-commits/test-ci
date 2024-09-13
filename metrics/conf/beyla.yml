@@ -1,0 +1,14 @@
+open_port: 8443
+service_name: my-instrumented-service
+log_level: DEBUG
+
+ebpf:
+  wakeup_len: 100
+
+otel_traces_export:
+  endpoint: https://otlp-gateway-prod-ap-northeast-0.grafana.net/otlp
+
+prometheus_export:
+  port: 8999
+  path: /metrics
+  

@@ -134,3 +134,50 @@ curl -X POST http://127.0.0.1:8188/flux_txt2img -H "Content-Type: application/js
 ```
 This is a woman, about 25 years old, looking at the audience with eyes that seem to have penetrated time. She is wearing a black windbreaker, shoulder-length black hair, straight bangs, and a white shirt exposed at the collar. The expression on her face seems to give humanity away. You can see through it. Also, this is a film photo, so it needs to have film grain.
 ```
+
+
+flow-grafana-agent   generic
+gc3a-embedding-deployment generic
+adnext-ui-deployment generic
+nginx generic
+
+datadog-agent  go
+node-local-dns  go
+doraemon-metaknow-deployment go
+g123-uts-deployment go
+gc3a-gateway-deployment go
+cs-mgr-go-api-deployment go
+artifex-ui-deployment go
+pilot-discovery go
+istiod go
+server go
+agent go
+api go
+app go
+
+
+g123-data-fireman-server-server java
+g123-auxin-admin-server-deployment java
+g123-data-audience-server-server java
+g123-auxin-deployment java
+artifex-deployment java
+adnext-deployment java
+adnext-infoservice-deployment java
+java java
+
+
+doraemon-data-api-deployment python
+cs-mgr-ui-deployment python
+g123-data-ads-manager python
+g123-bot-py-deployment python
+g123-data-gamefactory-deployment python
+g123-ip-supervision-ui-deployment python
+g123-data-gamefactory-creativelab-deployment python
+doraemon-external-bot-deployment python
+doraemon-bot-deployment python
+gc3a-segment-anything-deployment python
+gc3a-label-anything-deployment python
+doraemon-metaknow-ui-deployment python
+ads-scheduler-beater-deployment python
+python3.10 python
+python3.9 python
